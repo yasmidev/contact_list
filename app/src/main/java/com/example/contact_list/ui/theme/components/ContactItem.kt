@@ -40,7 +40,7 @@ import com.example.contact_list.model.Contact
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    Column(modifier = modifier.weight(1f)) {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(text = "${contact.nom} ${contact.prenom}",
                             style = MaterialTheme.typography.titleLarge)
                         Text(text = contact.telephone,

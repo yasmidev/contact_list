@@ -2,7 +2,7 @@ package com.example.contact_list.viewmodel
 
 import com.example.contact_list.model.Contact
 import androidx.compose.runtime.mutableStateListOf
-
+import androidx.lifecycle.ViewModel
 
 
 /* this folder should contain :
@@ -13,7 +13,7 @@ import androidx.compose.runtime.mutableStateListOf
 -  updateContact
 -  getContactById()
 */
-class ContactViewModel {
+class ContactViewModel : ViewModel() {
     private val list_contacts = mutableStateListOf(
         Contact(1, "Cabrera", "Yasmina", "EBGames", "111-1111", "222-2222", "yasmina@email.com", "Montreal", ""),
         Contact(2, "nom", "prenom", "Google", "333-3333", "444-4444", "nomprenom@email.com", "Laval", "")
