@@ -1,6 +1,7 @@
 package com.example.contact_list.model
 
-data class contact(
+data class Contact(
+    val id : Int,
     val nom : String,
     val prenom : String,
     val entreprise : String,
@@ -8,5 +9,5 @@ data class contact(
     val mobile : String,
     val email : String,
     val adresse : String,
-    val photo : String
+    val photo : String = ""
 )
