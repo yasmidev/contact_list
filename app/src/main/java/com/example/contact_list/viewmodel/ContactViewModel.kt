@@ -1,3 +1,16 @@
+/**
+ * ViewModel responsible for managing the list of contacts.
+ *
+ * Responsibilities:
+ * - Stores the list of contacts
+ * - Keeps contacts sorted alphabetically
+ * - Adds new contacts
+ * - Deletes contacts
+ * - Updates existing contacts
+ * - Finds a contact by its id
+ *
+ * This class contains the logic of the app (no UI).
+ */
 package com.example.contact_list.viewmodel
 
 import com.example.contact_list.model.Contact

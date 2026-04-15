@@ -1,3 +1,14 @@
+/**
+ * Reusable UI component representing a single contact card.
+ *
+ * Features:
+ * - Displays basic contact info (name + phone)
+ * - Can expand to show more details (email, address, etc.)
+ * - Has a delete button
+ * - Has an edit button
+ *
+ * Used inside ContactListScreen.
+ */
 package com.example.contact_list.ui.theme.components
 
 import androidx.compose.foundation.clickable
@@ -23,10 +34,13 @@ import com.example.contact_list.model.Contact
 
 
     @Composable
-    fun ContactItem(contact: Contact,
-                    onDelete: (Contact) -> Unit,
-                    modifier: Modifier = Modifier) {
-    var expanded by remember { mutableStateOf(false) }
+    fun ContactItem(
+        contact: Contact,
+        onDelete: (Contact) -> Unit,
+        onEdit: (Contact) -> Unit,
+        modifier: Modifier = Modifier) {
+
+     var expanded by remember { mutableStateOf(false) }
 
 
         Card(
@@ -41,12 +55,20 @@ import com.example.contact_list.model.Contact
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(text = "${contact.nom} ${contact.prenom}",
+                        Text(
+                            text = "${contact.nom} ${contact.prenom}",
                             style = MaterialTheme.typography.titleLarge)
-                        Text(text = contact.telephone,
+                        Text(
+                            text = contact.telephone,
                             style = MaterialTheme.typography.bodyMedium)
                     }
+
+                    TextButton(onClick = { onEdit(contact) }) {
+                        Text(text = "Edit")
+                    }
+
                     Spacer(modifier = Modifier.width(8.dp))
+
                     TextButton(onClick = { onDelete(contact) }) {
                         Text(text = "Delete")
                     }

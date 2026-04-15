@@ -1,3 +1,14 @@
+/**
+ * Data class representing a single contact.
+ *
+ * This class only stores data (no logic).
+ * Each contact has an id and personal information.
+ *
+ * Used by:
+ * - ViewModel (to manage contacts)
+ * - UI (to display contact info)
+ */
+
 package com.example.contact_list.model
 
 data class Contact(
