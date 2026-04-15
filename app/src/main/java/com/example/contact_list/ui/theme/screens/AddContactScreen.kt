@@ -40,6 +40,7 @@ fun AddContactScreen(
     ) {
         Text("Add Contact")
 
+        // quand tu appui sur le bouton, il doit trouver le dernier id et lui ajouter 1
             Button(
                 onClick = {
                 onSave(

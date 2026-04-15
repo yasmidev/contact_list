@@ -45,6 +45,14 @@ fun EditContactScreen(
     onCancel: () -> Unit
 ) {
     var nom by remember { mutableStateOf(contact.nom) }
+    var prenom by remember { mutableStateOf(contact.prenom) }
+    var entreprise by remember { mutableStateOf(contact.entreprise) }
+    var telephone by remember { mutableStateOf(contact.telephone) }
+    var mobile by remember { mutableStateOf(contact.mobile) }
+    var email by remember { mutableStateOf(contact.email) }
+    var adresse by remember { mutableStateOf(contact.adresse) }
+    var photo by remember { mutableStateOf(contact.photo) }
+
 
     Scaffold(
         topBar = {
@@ -68,9 +76,60 @@ fun EditContactScreen(
 
             )
 
+            OutlinedTextField(
+                value = prenom,
+                onValueChange = { prenom = it },
+                label = { Text("Prénom") }
+
+            )
+
+            OutlinedTextField(
+                value = entreprise,
+                onValueChange = { entreprise = it },
+                label = { Text("Entreprise") }
+
+            )
+
+            OutlinedTextField(
+                value = telephone,
+                onValueChange = { telephone = it },
+                label = { Text("Téléphone") }
+            )
+
+            OutlinedTextField(
+                value = mobile,
+                onValueChange = { mobile = it },
+                label = { Text("Mobile") }
+            )
+
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") }
+            )
+
+            OutlinedTextField(
+                value = adresse,
+                onValueChange = { adresse = it },
+                label = { Text("Adresse") }
+            )
+
+            OutlinedTextField(
+                value = photo,
+                onValueChange = { photo = it },
+                label = { Text("Photo") }
+            )
+
             Button(
                 onClick = {
-                    val updatedContact = contact.copy(nom = nom)
+                    val updatedContact = contact.copy(nom = nom
+                    , prenom = prenom
+                    , entreprise = entreprise
+                    , telephone = telephone
+                    , mobile = mobile
+                    , email = email
+                    , adresse = adresse
+                    , photo = photo)
 
                     onSave(updatedContact)
                 }

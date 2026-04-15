@@ -35,7 +35,12 @@ class ContactViewModel : ViewModel() {
         get() = list_contacts.sortedWith(compareBy({ it.nom.lowercase() }, { it.prenom.lowercase() }))
 
     fun addContact(contact: Contact) {
-        list_contacts.add(contact)
+        if (contact.id == 0) {
+            val newId = (list_contacts.maxByOrNull { it.id }?.id ?: 0) + 1
+            list_contacts.add(contact.copy(id = newId))
+        } else {
+            updateContact(contact)
+        }
     }
 
     fun deleteContact(contact: Contact) {

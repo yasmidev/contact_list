@@ -90,6 +90,7 @@ import com.example.contact_list.model.Contact
                         text = "Adresse : ${contact.adresse}",
                         style = MaterialTheme.typography.bodyMedium
                     )
+
                 }
             }
         }
