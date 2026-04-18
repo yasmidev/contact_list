@@ -11,7 +11,7 @@
  * This is the first screen shown when the app starts.
  */
 
-package com.example.contact_list.ui.theme.screens
+package com.example.contact_list.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,7 +25,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.contact_list.model.Contact
-import com.example.contact_list.ui.theme.components.ContactItem
+import com.example.contact_list.ui.components.ContactItem
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,7 +35,8 @@ fun ContactListScreen(
     onDelete: (Contact) -> Unit,
     onAddClick: () -> Unit,
     // int car il va prendre le id du contact
-    onEditClick: (Int) -> Unit
+    onEditClick: (Int) -> Unit,
+    onContactClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -56,9 +57,8 @@ fun ContactListScreen(
                 ContactItem(
                     contact = contact,
                     onDelete = onDelete,
-                    onEdit = {
-                        onEditClick(contact.id)
-                    }
+                    onEdit = { onEditClick(contact.id) },
+                    onContactClick = { onContactClick(contact.id) }
                 )
             }
         }

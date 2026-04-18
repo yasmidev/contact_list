@@ -8,11 +8,11 @@
  * - ADD_CONTACT → add screen
  * - EDIT_CONTACT → edit screen
  */
-package com.example.contact_list.ui.theme.navigation
+package com.example.contact_list.navigation
 
-object Routes {
+object Route {
     const val CONTACT_LIST = "contact_list"
+    const val DETAILED_CONTACT = "add_contact"
     const val ADD_CONTACT = "add_contact"
     const val EDIT_CONTACT = "edit_contact"
-
 }

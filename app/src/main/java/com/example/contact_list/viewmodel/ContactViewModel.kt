@@ -13,13 +13,18 @@
  */
 package com.example.contact_list.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.example.contact_list.model.Contact
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import com.example.contact_list.data.DataSource
+import kotlin.collections.sortedWith
+import kotlin.comparisons.compareBy
 
 
 /* this folder should contain :
-- contact list
+-  contactList
 -  alphabetical sort
 -  addContact()
 -  deleteContact()
@@ -27,34 +32,54 @@ import androidx.lifecycle.ViewModel
 -  getContactById()
 */
 class ContactViewModel : ViewModel() {
-    private val list_contacts = mutableStateListOf(
-        Contact(1, "Cabrera", "Yasmina", "EBGames", "111-1111", "222-2222", "yasmina@email.com", "Montreal", ""),
-        Contact(2, "nom", "prenom", "Google", "333-3333", "444-4444", "nomprenom@email.com", "Laval", "")
+
+    // Trier la liste de contacts en ordre alphabétique (prénom, ensuite nom)
+    private var uiState by mutableStateOf(
+        ContactUiState(
+            contacts = DataSource.loadData()
+                .sortedWith(compareBy({ it.prenom.lowercase() }, { it.nom.lowercase() }))
+        )
     )
     val contacts: List<Contact>
-        get() = list_contacts.sortedWith(compareBy({ it.nom.lowercase() }, { it.prenom.lowercase() }))
+        get() = uiState.contacts
 
+
+    // Mettre la liste de contacts à jour
+    fun updateList(newList: List<Contact>) {
+        uiState = uiState.copy(
+            contacts = newList.sortedWith(
+                compareBy(
+                    { it.nom.lowercase() },
+                    { it.prenom.lowercase() })
+            )
+        )
+    }
+    // Récupérer un contact avec son ID
+    fun getContactById(id: Int): Contact? {
+        return uiState.contacts.find { it.id == id }
+    }
+
+
+    // Mettre un contact à jour
+    fun updateContact(updatedContact: Contact) {
+        updateList(uiState.contacts.map { if (it.id == updatedContact.id) updatedContact else it })
+    }
+
+
+    // Ajouter un contact
     fun addContact(contact: Contact) {
+        val contactList = uiState.contacts.toMutableList()
         if (contact.id == 0) {
-            val newId = (list_contacts.maxByOrNull { it.id }?.id ?: 0) + 1
-            list_contacts.add(contact.copy(id = newId))
+            val newId = (contactList.maxByOrNull { it.id }?.id ?: 0) + 1
+            contactList.add(contact.copy(id = newId))
+            updateList(contactList)
         } else {
             updateContact(contact)
         }
     }
 
+    // Supprimer un contact
     fun deleteContact(contact: Contact) {
-        list_contacts.remove(contact)
-    }
-
-    fun updateContact(updatedContact: Contact) {
-        val index = list_contacts.indexOfFirst { it.id == updatedContact.id }
-        if (index != -1) {
-            list_contacts[index] = updatedContact
-        }
-    }
-
-    fun getContactById(id: Int): Contact? {
-        return list_contacts.find { it.id == id }
+        updateList(uiState.contacts.filter { it.id != contact.id })
     }
 }
