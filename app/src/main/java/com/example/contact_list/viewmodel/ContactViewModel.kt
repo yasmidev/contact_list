@@ -36,6 +36,7 @@ class ContactViewModel : ViewModel() {
 
     fun addContact(contact: Contact) {
         if (contact.id == 0) {
+            // va générer le prochain ID disponible
             val newId = (list_contacts.maxByOrNull { it.id }?.id ?: 0) + 1
             list_contacts.add(contact.copy(id = newId))
         } else {

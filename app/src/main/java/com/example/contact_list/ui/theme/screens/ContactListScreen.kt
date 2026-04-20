@@ -35,7 +35,8 @@ fun ContactListScreen(
     onDelete: (Contact) -> Unit,
     onAddClick: () -> Unit,
     // int car il va prendre le id du contact
-    onEditClick: (Int) -> Unit
+    onEditClick: (Int) -> Unit,
+    onDetailsClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -58,6 +59,9 @@ fun ContactListScreen(
                     onDelete = onDelete,
                     onEdit = {
                         onEditClick(contact.id)
+                    },
+                    onDetails = {
+                        onDetailsClick(contact.id)
                     }
                 )
             }

@@ -14,5 +14,5 @@ object Routes {
     const val CONTACT_LIST = "contact_list"
     const val ADD_CONTACT = "add_contact"
     const val EDIT_CONTACT = "edit_contact"
-
+    const val CONTACT_DETAILS = "contact_details"
 }

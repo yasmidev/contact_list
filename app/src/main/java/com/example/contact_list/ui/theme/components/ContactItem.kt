@@ -38,6 +38,7 @@ import com.example.contact_list.model.Contact
         contact: Contact,
         onDelete: (Contact) -> Unit,
         onEdit: (Contact) -> Unit,
+        onDetails: (Contact) -> Unit,
         modifier: Modifier = Modifier) {
 
      var expanded by remember { mutableStateOf(false) }
@@ -88,6 +89,11 @@ import com.example.contact_list.model.Contact
                     )
                     Text(
                         text = "Adresse : ${contact.adresse}",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+
+                    Text(
+                        text = "ID : ${contact.id}",
                         style = MaterialTheme.typography.bodyMedium
                     )
 

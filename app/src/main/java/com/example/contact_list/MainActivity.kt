@@ -15,6 +15,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.contact_list.ui.theme.navigation.AppNavigation
 import com.example.contact_list.ui.theme.Contact_ListTheme
+import com.example.contact_list.ui.theme.screens.ContactDetailsScreen
+import com.example.contact_list.model.Contact
+
+
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

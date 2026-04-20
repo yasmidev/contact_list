@@ -9,7 +9,6 @@
  *
  * This is the "router" of the app.
  */
-
 package com.example.contact_list.ui.theme.navigation
 
 import androidx.compose.runtime.Composable
@@ -20,21 +19,22 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.contact_list.ui.theme.screens.AddContactScreen
+import com.example.contact_list.ui.theme.screens.ContactDetailsScreen
 import com.example.contact_list.ui.theme.screens.ContactListScreen
 import com.example.contact_list.ui.theme.screens.EditContactScreen
 import com.example.contact_list.viewmodel.ContactViewModel
-
-
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
     val viewModel: ContactViewModel = viewModel()
 
-    NavHost(navController = navController,
-            startDestination = Routes.CONTACT_LIST) {
+    NavHost(
+        navController = navController,
+        // pour tester temporairement
+        Routes.CONTACT_LIST
+    ) {
         composable(Routes.CONTACT_LIST) {
-            // parfait à faire pour chaque
             ContactListScreen(
                 contacts = viewModel.contacts,
                 onDelete = { contact ->
@@ -45,9 +45,13 @@ fun AppNavigation() {
                 },
                 onEditClick = { contactId ->
                     navController.navigate("${Routes.EDIT_CONTACT}/$contactId")
+                },
+                onDetailsClick = { contactId ->
+                    navController.navigate("${Routes.CONTACT_DETAILS}/$contactId")
                 }
             )
         }
+
         composable(Routes.ADD_CONTACT) {
             AddContactScreen(
                 onSave = { contact ->
@@ -78,6 +82,25 @@ fun AppNavigation() {
                     },
                     onCancel = {
                         navController.popBackStack()
+                    }
+                )
+            }
+        }
+
+        composable(
+            route = "${Routes.CONTACT_DETAILS}/{contactId}",
+            arguments = listOf(
+                navArgument("contactId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val contactId = backStackEntry.arguments?.getInt("contactId")
+            val contact = contactId?.let { viewModel.getContactById(it) }
+
+            if (contact != null) {
+                ContactDetailsScreen(
+                    contact = contact,
+                    onEditClick = {
+                        navController.navigate("${Routes.EDIT_CONTACT}/${contact.id}")
                     }
                 )
             }
