@@ -28,6 +28,7 @@ import com.example.contact_list.model.Contact
 import com.example.contact_list.ui.theme.components.ContactItem
 
 
+// ------------ ContactListScreen -----------------
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactListScreen(
@@ -38,6 +39,9 @@ fun ContactListScreen(
     onEditClick: (Int) -> Unit,
     onDetailsClick: (Int) -> Unit
 ) {
+
+
+    // ----------- lazy columns et toutes les contacts ------------
     Scaffold(
         topBar = {
             TopAppBar(

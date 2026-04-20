@@ -51,8 +51,6 @@ fun EditContactScreen(
     var mobile by remember { mutableStateOf(contact.mobile) }
     var email by remember { mutableStateOf(contact.email) }
     var adresse by remember { mutableStateOf(contact.adresse) }
-    var photo by remember { mutableStateOf(contact.photo) }
-
 
     Scaffold(
         topBar = {
@@ -114,12 +112,6 @@ fun EditContactScreen(
                 label = { Text("Adresse") }
             )
 
-            OutlinedTextField(
-                value = photo,
-                onValueChange = { photo = it },
-                label = { Text("Photo") }
-            )
-
             Button(
                 onClick = {
                     val updatedContact = contact.copy(nom = nom
@@ -128,8 +120,7 @@ fun EditContactScreen(
                     , telephone = telephone
                     , mobile = mobile
                     , email = email
-                    , adresse = adresse
-                    , photo = photo)
+                    , adresse = adresse)
 
                     onSave(updatedContact)
                 }

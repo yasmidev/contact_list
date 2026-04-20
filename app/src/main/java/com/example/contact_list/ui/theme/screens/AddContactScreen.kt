@@ -46,12 +46,17 @@ import androidx.compose.ui.unit.dp
 import com.example.contact_list.R
 import com.example.contact_list.model.Contact
 
+
+// ------------ AddContactScreen -----------------
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddContactScreen(
     onSave: (Contact) -> Unit,
     onCancel: () -> Unit
 ) {
+
+
+    // utile pour champs de text
     var nom by remember { mutableStateOf("") }
     var prenom by remember { mutableStateOf("") }
     var entreprise by remember { mutableStateOf("") }
@@ -60,6 +65,10 @@ fun AddContactScreen(
     var email by remember { mutableStateOf("") }
     var adresse by remember { mutableStateOf("") }
 
+
+
+
+    // ---------------- UI --------------------
     Scaffold(
         topBar = {
             TopAppBar(
@@ -75,6 +84,9 @@ fun AddContactScreen(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+
+            // ------------ carte pour le titre et la photo ---------------
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
@@ -105,6 +117,10 @@ fun AddContactScreen(
                     )
                 }
             }
+
+
+
+            // ----------- comme genre le formulaire --------------------
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -171,7 +187,11 @@ fun AddContactScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // ------------  BOUTONS ---------------
+
+
+
+
+            // ------------  boutons pour enregistrer et annuler ---------------
             Button(
                 onClick = {
                     val newContact = Contact(
@@ -183,7 +203,7 @@ fun AddContactScreen(
                         mobile = mobile,
                         email = email,
                         adresse = adresse,
-                        photo = ""
+                        photo = R.drawable.bluepfp
                     )
                     onSave(newContact)
                 },

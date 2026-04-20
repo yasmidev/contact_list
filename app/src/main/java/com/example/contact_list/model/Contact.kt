@@ -10,6 +10,8 @@
  */
 
 package com.example.contact_list.model
+import com.example.contact_list.R
+
 
 data class Contact(
     val id : Int,
@@ -20,5 +22,5 @@ data class Contact(
     val mobile : String,
     val email : String,
     val adresse : String,
-    val photo : String = ""
+    val photo : Int = R.drawable.bluepfp
 )

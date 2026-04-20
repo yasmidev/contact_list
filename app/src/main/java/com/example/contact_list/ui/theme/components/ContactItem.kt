@@ -11,13 +11,16 @@
  */
 package com.example.contact_list.ui.theme.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,6 +37,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.contact_list.model.Contact
 import androidx.compose.material3.Icon
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import com.example.contact_list.R
 import androidx.compose.ui.res.painterResource
 
@@ -61,6 +66,17 @@ import androidx.compose.ui.res.painterResource
             // i have to add the pfps BLANK
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()) {
+                    Image(
+                        painter = painterResource(id = R.drawable.bluepfp),
+                        contentDescription = "Photo du contact",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(50.dp)
+                            .clip(CircleShape)
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+
+
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = "${contact.nom} ${contact.prenom}",
@@ -68,6 +84,34 @@ import androidx.compose.ui.res.painterResource
                         Text(
                             text = contact.telephone,
                             style = MaterialTheme.typography.bodyMedium)
+
+
+                        if (expanded) {
+
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text(
+                                text = "Entreprise : ${contact.entreprise}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Text(
+                                text = "Mobile : ${contact.mobile}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Text(
+                                text = "Email : ${contact.email}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Text(
+                                text = "Adresse : ${contact.adresse}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+
+                            Text(
+                                text = "ID : ${contact.id}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+
+                        }
                     }
 
                     IconButton(onClick = { onDetails(contact) }) {
@@ -87,30 +131,6 @@ import androidx.compose.ui.res.painterResource
 
                         )
                     }
-
-                }
-                if (expanded) {
-                    Text(
-                        text = "Entreprise : ${contact.entreprise}",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        text = "Mobile : ${contact.mobile}",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        text = "Email : ${contact.email}",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        text = "Adresse : ${contact.adresse}",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-
-                    Text(
-                        text = "ID : ${contact.id}",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
 
                 }
             }

@@ -24,16 +24,24 @@ import com.example.contact_list.ui.theme.screens.ContactListScreen
 import com.example.contact_list.ui.theme.screens.EditContactScreen
 import com.example.contact_list.viewmodel.ContactViewModel
 
+
+// ----------- AppNavigation -----------------
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
     val viewModel: ContactViewModel = viewModel()
 
+
+
+    // ------------- important -------------
     NavHost(
         navController = navController,
-        // pour tester temporairement
+        // pour tester temporairement, tu peux le changer
         Routes.CONTACT_LIST
     ) {
+
+
+        // ----------- routes ContactListScreen ------------
         composable(Routes.CONTACT_LIST) {
             ContactListScreen(
                 contacts = viewModel.contacts,
@@ -52,6 +60,9 @@ fun AppNavigation() {
             )
         }
 
+
+
+        // ---------------- routes AddContactScreen ------------------
         composable(Routes.ADD_CONTACT) {
             AddContactScreen(
                 onSave = { contact ->
@@ -64,29 +75,8 @@ fun AppNavigation() {
             )
         }
 
-        composable(
-            route = "${Routes.EDIT_CONTACT}/{contactId}",
-            arguments = listOf(
-                navArgument("contactId") { type = NavType.IntType }
-            )
-        ) { backStackEntry ->
-            val contactId = backStackEntry.arguments?.getInt("contactId")
-            val contact = contactId?.let { viewModel.getContactById(it) }
 
-            if (contact != null) {
-                EditContactScreen(
-                    contact = contact,
-                    onSave = { updatedContact ->
-                        viewModel.updateContact(updatedContact)
-                        navController.popBackStack()
-                    },
-                    onCancel = {
-                        navController.popBackStack()
-                    }
-                )
-            }
-        }
-
+        // ------------------ routes ContactDetailsScreen ------------------
         composable(
             route = "${Routes.CONTACT_DETAILS}/{contactId}",
             arguments = listOf(

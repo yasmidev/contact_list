@@ -17,23 +17,21 @@ import com.example.contact_list.model.Contact
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 
-
-/* this folder should contain :
-- contact list
--  alphabetical sort
--  addContact()
--  deleteContact()
--  updateContact
--  getContactById()
-*/
+// ------------ ContactViewModel -----------------
 class ContactViewModel : ViewModel() {
     private val list_contacts = mutableStateListOf(
-        Contact(1, "Cabrera", "Yasmina", "EBGames", "111-1111", "222-2222", "yasmina@email.com", "Montreal", ""),
-        Contact(2, "nom", "prenom", "Google", "333-3333", "444-4444", "nomprenom@email.com", "Laval", "")
+        Contact(1, "Cabrera", "Yasmina", "EBGames", "111-1111", "222-2222", "yasmina@email.com", "Montreal"),
+        Contact(2, "nom", "prenom", "Google", "333-3333", "444-4444", "nomprenom@email.com", "Laval")
     )
+
+    // ---------- getter sortedlist --------------
     val contacts: List<Contact>
         get() = list_contacts.sortedWith(compareBy({ it.nom.lowercase() }, { it.prenom.lowercase() }))
 
+
+
+
+    // ------------ add contact ---------------
     fun addContact(contact: Contact) {
         if (contact.id == 0) {
             // va générer le prochain ID disponible
@@ -44,10 +42,15 @@ class ContactViewModel : ViewModel() {
         }
     }
 
+
+    // ------------- delete contact --------------
     fun deleteContact(contact: Contact) {
         list_contacts.remove(contact)
     }
 
+
+
+    // ------------ update contact --------------
     fun updateContact(updatedContact: Contact) {
         val index = list_contacts.indexOfFirst { it.id == updatedContact.id }
         if (index != -1) {
@@ -55,6 +58,7 @@ class ContactViewModel : ViewModel() {
         }
     }
 
+    // ------------ getter -----------
     fun getContactById(id: Int): Contact? {
         return list_contacts.find { it.id == id }
     }

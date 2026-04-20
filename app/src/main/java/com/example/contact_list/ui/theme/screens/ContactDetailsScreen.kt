@@ -3,7 +3,6 @@ package com.example.contact_list.ui.theme.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,7 +22,6 @@ import com.example.contact_list.R
 import androidx.compose.material3.MaterialTheme
 import com.example.contact_list.model.Contact
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -35,7 +33,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 
 
 
-
+// ------------ ContactDetailsScreen -----------------
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,6 +55,11 @@ fun ContactDetailsScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
+
+
+
+
+            // -------------- carte profile --------------
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
@@ -71,7 +74,7 @@ fun ContactDetailsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.pfp),
+                        painter = painterResource(id = R.drawable.bluepfp),
                         contentDescription = "Photo du contact",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -96,6 +99,13 @@ fun ContactDetailsScreen(
                 }
             }
 
+
+
+
+
+
+            // -------------- card info --------------
+
             Spacer(modifier = Modifier.height(20.dp))
 
             Card(
@@ -117,6 +127,12 @@ fun ContactDetailsScreen(
                     ContactInfoRow(label = "Adresse", value = contact.adresse)
                 }
             }
+
+
+
+
+
+            // --------------- boutons pour modifier et annuler ---------------
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -141,6 +157,10 @@ fun ContactDetailsScreen(
 
 
 
+
+
+
+// ------------- pour le UI, fonction utile ---------------
 @Composable
 fun ContactInfoRow(
     label: String,
