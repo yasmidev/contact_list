@@ -101,6 +101,9 @@ fun AppNavigation() {
                     contact = contact,
                     onEditClick = {
                         navController.navigate("${Routes.EDIT_CONTACT}/${contact.id}")
+                    },
+                    onCancel = {
+                        navController.popBackStack()
                     }
                 )
             }

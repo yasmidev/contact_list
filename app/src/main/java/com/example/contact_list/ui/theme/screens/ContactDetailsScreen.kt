@@ -41,7 +41,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 @Composable
 fun ContactDetailsScreen(
     contact: Contact,
-    onEditClick: () -> Unit
+    onEditClick: () -> Unit,
+    onCancel: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -126,6 +127,14 @@ fun ContactDetailsScreen(
             ) {
                 Text("Modifier le contact")
             }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = onCancel,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp)
+            ) {Text(text = "Annuler")}
         }
     }
 }
