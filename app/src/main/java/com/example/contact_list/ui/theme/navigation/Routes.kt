@@ -9,7 +9,7 @@
  * - EDIT_CONTACT → edit screen
  */
 package com.example.contact_list.ui.theme.navigation
-
+// pour les utiliser fait juste Routes.CONTACT_LIST
 object Routes {
     const val CONTACT_LIST = "contact_list"
     const val ADD_CONTACT = "add_contact"

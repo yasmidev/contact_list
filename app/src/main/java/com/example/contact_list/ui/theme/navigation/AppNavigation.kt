@@ -18,10 +18,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.contact_list.ui.theme.screens.EditContactScreen
 import com.example.contact_list.ui.theme.screens.AddContactScreen
 import com.example.contact_list.ui.theme.screens.ContactDetailsScreen
 import com.example.contact_list.ui.theme.screens.ContactListScreen
-import com.example.contact_list.ui.theme.screens.EditContactScreen
 import com.example.contact_list.viewmodel.ContactViewModel
 
 
@@ -36,7 +36,7 @@ fun AppNavigation() {
     // ------------- important -------------
     NavHost(
         navController = navController,
-        // pour tester temporairement, tu peux le changer
+        // pour tester temporairement, tu peux le changer pour ContactDetails en choisisant un ID
         Routes.CONTACT_LIST
     ) {
 
@@ -98,5 +98,30 @@ fun AppNavigation() {
                 )
             }
         }
+
+
+        // Écran pour modifier un contact
+        composable(
+            route = "${Routes.EDIT_CONTACT}/{contactId}",
+            arguments = listOf(
+                navArgument("contactId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val contactId = backStackEntry.arguments?.getInt("contactId")
+            val contact = contactId?.let { viewModel.getContactById(it) }
+
+            if (contact != null) {
+                EditContactScreen(
+                    contact = contact,
+                    onSave = { updatedContact ->
+                        viewModel.updateContact(updatedContact)
+                        navController.popBackStack()
+                    },
+                    onCancel = {
+                        navController.popBackStack()
+                    }
+                    )
+            }
+        }
     }
-}
+    }

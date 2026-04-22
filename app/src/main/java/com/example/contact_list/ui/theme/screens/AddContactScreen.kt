@@ -56,6 +56,7 @@ fun AddContactScreen(
 ) {
 
 
+    // variables états
     // utile pour champs de text
     var nom by remember { mutableStateOf("") }
     var prenom by remember { mutableStateOf("") }
@@ -101,7 +102,7 @@ fun AddContactScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.pfp),
+                        painter = painterResource(id = R.drawable.bluepfp),
                         contentDescription = "Photo du contact",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

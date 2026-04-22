@@ -86,7 +86,8 @@ fun ContactDetailsScreen(
 
                     Text(
                         text = "${contact.prenom} ${contact.nom}",
-                        style = MaterialTheme.typography.headlineSmall
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.primary
                     )
 
                     Spacer(modifier = Modifier.height(4.dp))
@@ -161,6 +162,7 @@ fun ContactDetailsScreen(
 
 
 // ------------- pour le UI, fonction utile ---------------
+// à la place de répéter le truc plein de fois
 @Composable
 fun ContactInfoRow(
     label: String,

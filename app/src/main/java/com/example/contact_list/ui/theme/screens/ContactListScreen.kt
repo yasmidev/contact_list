@@ -22,15 +22,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.contact_list.model.Contact
 import com.example.contact_list.ui.theme.components.ContactItem
+import androidx.compose.ui.res.painterResource
+import com.example.contact_list.R
+
+
+
+
 
 
 // ------------ ContactListScreen -----------------
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+// callbacks
 fun ContactListScreen(
     contacts: List<Contact>,
     onDelete: (Contact) -> Unit,
@@ -45,8 +54,14 @@ fun ContactListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Contact List") }
-            ) },
+                title = {
+                    Text(
+                        "Contact List"
+                            // i have to add a color and font
+                        ) },
+
+            ) }
+        ,
         floatingActionButton = {
             FloatingActionButton(onClick = onAddClick) {
                 Text("+")
@@ -57,6 +72,10 @@ fun ContactListScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+
+
+
+            // va prendre le liste de `contacts` et les afficher en utilisant `ContactItem`
             items(contacts) { contact ->
                 ContactItem(
                     contact = contact,

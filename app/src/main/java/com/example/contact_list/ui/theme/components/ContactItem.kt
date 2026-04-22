@@ -12,6 +12,7 @@
 package com.example.contact_list.ui.theme.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,8 +42,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import com.example.contact_list.R
 import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
 
 
+// pour présenter chaque contact en item dans la liste (cartes, pour que ca soit beau)
 @Composable
     fun ContactItem(
         contact: Contact,
@@ -60,7 +64,7 @@ import androidx.compose.ui.res.painterResource
                 .fillMaxWidth()
                 .clickable { expanded = !expanded },
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
+                containerColor = Color.White
             )
         ) {
             // i have to add the pfps BLANK
@@ -117,7 +121,8 @@ import androidx.compose.ui.res.painterResource
                     IconButton(onClick = { onDetails(contact) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.morevert),
-                            contentDescription = "Détails"
+                            contentDescription = "Détails",
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
 
