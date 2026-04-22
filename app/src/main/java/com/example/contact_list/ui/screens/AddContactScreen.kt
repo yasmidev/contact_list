@@ -1,26 +1,15 @@
-/**
- * Screen used to add a new contact.
- *
- * Features:
- * - Displays input fields (name, phone, email, etc.)
- * - Lets the user enter new contact information
- * - Calls onSave() when the user confirms
- * - Calls onCancel() to go back without saving
- *
- * Navigation:
- * - Opened from ContactListScreen
- */
+/* ÉCRAN POUR AJOUTER UN CONTACT */
 package com.example.contact_list.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,15 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.contact_list.model.Contact
 import androidx.compose.ui.Alignment
+import com.example.contact_list.ui.components.TextBox
+import com.example.contact_list.ui.components.TopBar
 
-
-@OptIn(ExperimentalSubclassOptIn::class, ExperimentalMaterial3Api::class)
 @Composable
-fun AddContactScreen(
-    onSave: (Contact) -> Unit,
-    onCancel: () -> Unit
-) {
-    var photo by remember { mutableStateOf("") }
+fun AddContactScreen(onSave: (Contact) -> Unit, onCancel: () -> Unit) {
+
+//    var photo by remember { mutableStateOf("") }
     var prenom by remember { mutableStateOf("") }
     var nom by remember { mutableStateOf("") }
     var mobile by remember { mutableStateOf("") }
@@ -47,48 +34,71 @@ fun AddContactScreen(
     var email by remember { mutableStateOf("") }
     var adresse by remember { mutableStateOf("") }
 
+    val prenomValide = prenom != ""
+    val mobileValide = mobile == "" || mobile.length == 10
+    val telephoneValide = mobile == "" || mobile.length == 10
+    val emailValide = email == "" || (email.contains("@") && email.contains("."))
+    val isValid = prenomValide && mobileValide && emailValide
+    var error by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Ajouter un contact") }
-            )
+            TopBar("Add Contact")
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .padding(16.dp),
+            modifier = Modifier.padding(innerPadding).fillMaxSize().padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TextBox(value = photo, onValueChange = { photo = it }, label = "Photo")
-            TextBox(value = prenom, onValueChange = { prenom = it }, label = "Prénom")
+//            Image(
+//                painter = painterResource(photo),
+//                contentDescription = null,
+//                modifier = Modifier.size(120.dp))
+            TextBox(
+                value = prenom, onValueChange = { prenom = it }, label = "Prénom",
+                isError = if (error) !prenomValide else false
+            )
             TextBox(value = nom, onValueChange = { nom = it }, label = "Nom")
-            TextBox(value = mobile, onValueChange = { mobile = it }, label = "Mobile")
-            TextBox(value = telephone, onValueChange = { telephone = it }, label = "Téléphone")
+            TextBox(
+                value = mobile, onValueChange = { mobile = it }, label = "Mobile",
+                isError = if (error) !mobileValide else false
+            )
+            TextBox(
+                value = telephone, onValueChange = { telephone = it }, label = "Téléphone",
+                isError = if (error) !telephoneValide else false
+            )
             TextBox(value = entreprise, onValueChange = { entreprise = it }, label = "Entreprise")
-            TextBox(value = email, onValueChange = { email = it }, label = "Email")
+            TextBox(
+                value = email, onValueChange = { email = it }, label = "Email",
+                isError = if (error) !emailValide else false
+            )
             TextBox(value = adresse, onValueChange = { adresse = it }, label = "Adresse")
 
-            // quand tu appui sur le bouton, il doit trouver le dernier id et lui ajouter 1
+            Spacer(modifier = Modifier.height(30.dp))
+
             Button(
+                modifier = Modifier.padding(bottom = 6.dp),
                 onClick = {
-                    onSave(
-                        Contact(
-                            id = 0,
-                            nom = nom,
-                            prenom = prenom,
-                            entreprise = entreprise,
-                            telephone = telephone,
-                            mobile = mobile,
-                            email = email,
-                            adresse = adresse,
-                            photo = photo
+                    if (isValid) {
+                        onSave(
+                            Contact(
+                                id = 0,
+                                nom = nom,
+                                prenom = prenom,
+                                entreprise = entreprise,
+                                telephone = telephone,
+                                mobile = mobile,
+                                email = email,
+                                adresse = adresse,
+//                            photo = photo
+                            )
                         )
-                    )
+                    } else {
+                        error = true
+                    }
                 }
-            ) // il faut ajouter quelque chose dans le bouton pour quil soit valide
+            )
             {
                 Text("Save")
             }

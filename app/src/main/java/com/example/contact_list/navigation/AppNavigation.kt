@@ -1,15 +1,4 @@
-/**
- * Handles navigation between screens.
- *
- * Responsibilities:
- * - Defines all routes (list, add, edit)
- * - Connects screens together using NavHost
- * - Passes data between screens (like contactId)
- * - Calls ViewModel functions when needed
- *
- * This is the "router" of the app.
- */
-
+/* FICHIER POUR CONTRÔLER LA NAVIGATION DE L'APPLICATION */
 package com.example.contact_list.navigation
 
 import androidx.compose.runtime.Composable
@@ -25,7 +14,6 @@ import com.example.contact_list.ui.screens.ContactDetailScreen
 import com.example.contact_list.ui.screens.ContactListScreen
 import com.example.contact_list.ui.screens.EditContactScreen
 import com.example.contact_list.viewmodel.ContactViewModel
-
 
 @Composable
 fun AppNavigation(
@@ -68,10 +56,6 @@ fun AppNavigation(
             if (contact != null) {
                 ContactDetailScreen(
                     contact = contact,
-                    onSave = { updatedContact ->
-                        viewModel.updateContact(updatedContact)
-                        navController.popBackStack()
-                    },
                     onCancel = {
                         navController.popBackStack()
                     }

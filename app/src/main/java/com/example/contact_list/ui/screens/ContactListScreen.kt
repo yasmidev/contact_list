@@ -1,57 +1,47 @@
-/**
- * Main screen displaying the list of contacts.
- *
- * UI responsibilities:
- * - Shows all contacts in a scrollable list (LazyColumn)
- * - Displays each contact using ContactItem
- * - Allows deleting a contact
- * - Allows navigating to Add screen
- * - Allows navigating to Edit screen
- *
- * This is the first screen shown when the app starts.
- */
-
+/* ÉCRAN POUR AVEC LA LISTE DE TOUT LES CONTACTS */
 package com.example.contact_list.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.contact_list.model.Contact
 import com.example.contact_list.ui.components.ContactItem
+import com.example.contact_list.ui.components.TopBar
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactListScreen(
     contacts: List<Contact>,
     onDelete: (Contact) -> Unit,
     onAddClick: () -> Unit,
-    // int car il va prendre le id du contact
     onEditClick: (Int) -> Unit,
     onContactClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Contact List") }
-            ) },
+            TopBar("Contacts")
+        },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddClick) {
-                Text("+")
-            } }
+            FloatingActionButton(onClick = onAddClick, shape = RoundedCornerShape(40.dp)) {
+                Icon(imageVector = Icons.Filled.Add, contentDescription = "add")
+            }
+        }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
+                .padding(16.dp)
         ) {
             items(contacts) { contact ->
                 ContactItem(

@@ -1,24 +1,14 @@
-/**
- * Reusable UI component representing a single contact card.
- *
- * Features:
- * - Displays basic contact info (name + phone)
- * - Can expand to show more details (email, address, etc.)
- * - Has a delete button
- * - Has an edit button
- *
- * Used inside ContactListScreen.
- */
+/* COMPOSABLE POUR CHAQUE CARTE DE CONTACT */
 package com.example.contact_list.ui.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -32,11 +22,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.contact_list.model.Contact
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ContactItem(
     contact: Contact,
@@ -57,34 +46,36 @@ fun ContactItem(
             ),
         shape = RoundedCornerShape(40.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.secondary,
         )
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(modifier = Modifier.weight(1f)) {
+                Image(
+                    painter = painterResource(contact.photo),
+                    contentDescription = null,
+                    modifier = Modifier.size(50.dp).padding(end = 10.dp)
+                )
                     Text(
                         text = "${contact.prenom} ${contact.nom}",
-                        style = MaterialTheme.typography.titleLarge
                     )
-                }
             }
             if (expanded) {
-                Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = contact.mobile.ifEmpty { contact.telephone },
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.fillMaxWidth(0.6F)
+                        modifier = Modifier.fillMaxWidth(0.5F).padding(start = 8.dp)
                     )
                     Row {
                         TextButton(onClick = { onEdit(contact) }) {
                             Text(text = "Edit")
                         }
-                        Spacer(modifier = Modifier.width(8.dp))
-
                         TextButton(onClick = { onDelete(contact) }) {
                             Text(text = "Delete")
                         }

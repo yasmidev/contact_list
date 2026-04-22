@@ -1,15 +1,7 @@
-/**
- * Data class representing a single contact.
- *
- * This class only stores data (no logic).
- * Each contact has an id and personal information.
- *
- * Used by:
- * - ViewModel (to manage contacts)
- * - UI (to display contact info)
- */
-
+/* VARIABLES D'UN CONTACT */
 package com.example.contact_list.model
+
+import com.example.contact_list.R
 
 data class Contact(
     val id : Int,
@@ -20,5 +12,5 @@ data class Contact(
     val mobile : String,
     val email : String,
     val adresse : String,
-    val photo : String = ""
+    val photo : Int = R.drawable.profile_pic
 )

@@ -11,27 +11,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80,
-    surface = Grey
+    primary = LightPink,        // TextBoxes, Buttons
+    secondary = White,          // Just used for card backgr
+    primaryContainer = Grey,    // Floating btn bckgr
+    onPrimaryContainer = White, // Text on floating btn
+    background = Pink,          // App background
+    surface = Iron,             // Top bar bckgr
+    onSurface = Black           // Text on cards
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    surface = Grey
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = LightPink,        // TextBoxes, Buttons
+    secondary = White,          // Just used for card backgr
+    primaryContainer = Grey,    // Floating btn bckgr
+    onPrimaryContainer = White, // Text on floating btn
+    background = Pink,          // App background
+    surface = Iron,             // Top bar bckgr
+    onSurface = Black           // Text on cards
 )
 
 @Composable
@@ -46,6 +42,7 @@ fun Contact_ListTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
+
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }

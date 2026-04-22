@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.material3)
     // ----------------- navigation ------------------
     val nav_version = "2.9.7"
     // Jetpack Compose integration
@@ -53,7 +54,7 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
     // JSON serialization library, works with the Kotlin serialization plugin
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

@@ -1,13 +1,4 @@
-/**
- * Entry point of the application.
- *
- * Responsibilities:
- * - Launches the app
- * - Applies the theme
- * - Starts the navigation system
- *
- * This file should stay simple (no business logic here).
- */
+/* APPLICATION */
 package com.example.contact_list
 
 import android.os.Bundle

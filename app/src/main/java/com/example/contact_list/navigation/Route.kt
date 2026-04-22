@@ -1,13 +1,4 @@
-/**
- * Contains all navigation route constants.
- *
- * Used to avoid hardcoding strings in navigation.
- *
- * Example:
- * - CONTACT_LIST → main screen
- * - ADD_CONTACT → add screen
- * - EDIT_CONTACT → edit screen
- */
+/* ÉCRANS - POUR LA NAVIGATION */
 package com.example.contact_list.navigation
 
 object Route {
