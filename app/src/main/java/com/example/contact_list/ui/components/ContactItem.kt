@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.contact_list.model.Contact
+import com.example.contact_list.R
 
 @Composable
 fun ContactItem(
@@ -73,12 +74,21 @@ fun ContactItem(
                         modifier = Modifier.fillMaxWidth(0.5F).padding(start = 8.dp)
                     )
                     Row {
-                        TextButton(onClick = { onEdit(contact) }) {
-                            Text(text = "Edit")
+                        IconButton(onClick = { onDetails(contact) }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.morevert),
+                                contentDescription = "Détails",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
                         }
-                        TextButton(onClick = { onDelete(contact) }) {
-                            Text(text = "Delete")
-                        }
+                        IconButton(onClick = { onDelete(contact) }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.delete),
+                                contentDescription = "Supprimer",
+                                tint = MaterialTheme.colorScheme.error
+    
+                            )
+                        }    
                     }
                 }
             }
